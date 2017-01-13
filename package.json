@@ -1,0 +1,26 @@
+{
+  "name": "beerappserver",
+  "version": "1.0.0",
+  "description": "server for my React-Native Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Zachary Wachtel",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^0.3.3",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "express-session": "^1.14.2",
+    "graphql": "^0.8.2",
+    "graphql-tools": "^0.8.4",
+    "jsonwebtoken": "^7.2.1",
+    "mongoose": "^4.7.6",
+    "node-uuid": "^1.4.7",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "request": "^2.79.0",
+    "request-promise": "^4.1.1"
+  }
+}
