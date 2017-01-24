@@ -33,7 +33,7 @@ app.post('/sessions/create', (req, res) => {
   }
   const name = req.body.username
   const password = req.body.password
-  const user = UserModel.findOne({name}) (error, data) => {
+  const user = UserModel.findOne({ name }, (error, data) => {
     return data
   })
 
