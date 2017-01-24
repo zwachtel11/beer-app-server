@@ -1,18 +1,12 @@
 'use strict'
 
 const passport = require('passport')
-const User = require('./connectors').User
-let LocalStrategy = require('passport-local').Strategy
-const config = require('./config')
+const UserConnector = require('./connectors').User
+const UserModel = require('./model')
 const express = require('express')
-const jwt = require('jsonwebtoken')
 const app = module.exports = express.Router()
 
-const dummy = new User ()
-
-const createToken = (user) => {
-  return jwt.sign(user, config.secret, { expiresIn: 60*60*5})
-}
+const dummy = new UserConnector()
 
 //sign up a new user, still figuring out what do to this in sitch !
 app.post('/users', (req, res) => {
@@ -37,15 +31,19 @@ app.post('/sessions/create', (req, res) => {
   if (!req.body.username || !req.body.password) {
     return res.status(400).send("You must send the username and the password")
   }
-  const user = dummy.findUser(req.body.username)
+  const name = req.body.username
+  const password = req.body.password
+  const user = UserModel.findOne({name}) (error, data) => {
+    return data
+  })
 
-  console.log(dummy.checkPassword(req.body.username, req.body.password))
-  if (dummy.checkPassword(req.body.username, req.body.password) == false) {
+  console.log(user)
+  if (user.checkPassword(req.body.password) === false) {
     return res.status(401).send("The username or password don't match")
   }
 
   res.status(201).send({
-    id_token: createToken(user)
+    id_token: user.createToken()
   })
 })
 

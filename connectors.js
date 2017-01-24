@@ -21,13 +21,6 @@ class User {
       })
       return person
     }
-    this.checkPassword = (name, password) => {
-      const person = this.findUser(name)
-      // checkout schema 
-      console.log(person)
-
-      return (password == person.password)
-    }
     this.findById = (id) => {
       const person = UserModel.findById(id, (error, data) => {
         return data
